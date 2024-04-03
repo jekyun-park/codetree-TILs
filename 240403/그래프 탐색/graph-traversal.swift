@@ -1,6 +1,6 @@
 import Foundation
 
-func dfs(_ vertex: Int) -> Int? {
+func dfs(_ vertex: Int) {
     for v in graph[vertex] {
         if !visited[v] {
             visited[v] = true
@@ -8,8 +8,6 @@ func dfs(_ vertex: Int) -> Int? {
             dfs(v)
         }
     }
-
-    return answer
 }
 
 var answer = 0
@@ -23,4 +21,5 @@ for _ in 0..<nm[1] {
     graph[startEnd[1]].append(startEnd[0])
 }
 
-print(dfs(1)!-1)
+dfs(1)
+print(answer-1)

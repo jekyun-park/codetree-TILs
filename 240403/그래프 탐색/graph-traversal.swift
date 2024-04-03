@@ -28,4 +28,4 @@ for _ in 0..<nm[1] {
 }
 
 dfs(1)
-print(answer-1)
+print(answer == 0 ? 0 : answer-1)

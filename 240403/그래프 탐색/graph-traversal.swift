@@ -1,15 +1,21 @@
 import Foundation
 
 func dfs(_ vertex: Int) {
-    for v in graph[vertex] {
-        if !visited[v] {
-            visited[v] = true
-            answer += 1
-            dfs(v)
+    stack.append(vertex)
+
+    while !stack.isEmpty {
+        guard let v = stack.popLast() else { return }
+        for v in graph[vertex] {
+            if !visited[v] {
+                visited[v] = true
+                answer += 1
+                dfs(v)
         }
+    }
     }
 }
 
+var stack = [Int]()
 var answer = 0
 let nm = readLine()!.split(separator: " ").map { Int($0)! }
 var graph: [[Int]] = Array(repeating: [], count: nm[0]+1)

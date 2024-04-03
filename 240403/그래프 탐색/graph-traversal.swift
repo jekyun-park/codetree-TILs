@@ -19,7 +19,7 @@ var stack = [Int]()
 var answer = 0
 let nm = readLine()!.split(separator: " ").map { Int($0)! }
 var graph: [[Int]] = Array(repeating: [], count: nm[0]+1)
-var visited = Array(repeating: false, count: nm[0])
+var visited = Array(repeating: false, count: nm[0]+1)
 
 for _ in 0..<nm[1] {
     let startEnd = readLine()!.split(separator: " ").map { Int($0)! }

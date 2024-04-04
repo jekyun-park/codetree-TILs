@@ -31,7 +31,7 @@ func dfs(_ x: Int, _ y: Int) {
 }
 
 func isInRange(_ x: Int, _ y: Int) -> Bool {
-    return (0..<n ~= x) && (0..<m ~= y)
+    return ((0..<n) ~= x) && ((0..<m) ~= y)
 }
 
 func canMoveTo(_ x: Int, _ y: Int) -> Bool {

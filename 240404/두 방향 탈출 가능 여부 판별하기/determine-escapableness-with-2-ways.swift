@@ -37,7 +37,7 @@ func isInRange(_ x: Int, _ y: Int) -> Bool {
 }
 
 func canMoveTo(_ x: Int, _ y: Int) -> Bool {
-    return isInRange(x, y) && !visited[x][y] && (map[x][y] != 1)
+    return isInRange(x, y) && !visited[x][y] && (map[x][y] != 0)
 }
 
 visited[0][0] = true

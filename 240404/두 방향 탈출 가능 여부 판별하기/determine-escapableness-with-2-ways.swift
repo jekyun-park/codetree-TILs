@@ -20,7 +20,7 @@ func dfs(_ x: Int, _ y: Int) {
 
     for i in 0...1 {
         let nx = x + dx[i]
-        let ny = x + dy[i]
+        let ny = y + dy[i]
 
         if canMoveTo(nx, ny) {
             visited[nx][ny] = true
@@ -37,11 +37,13 @@ func isInRange(_ x: Int, _ y: Int) -> Bool {
 }
 
 func canMoveTo(_ x: Int, _ y: Int) -> Bool {
-    return isInRange(x, y) && !visited[x][y] && (map[x][y] != 0)
+    if !isInRange(x, y) { return false }
+    if (visited[x][y] || map[x][y] == 0) { return false }
+    return true
 }
 
 visited[0][0] = true
-answer[0][0] = 1
+answer[0][0] = order
 dfs(0, 0)
 
 print(answer[n-1][m-1] == 0 ? 0 : 1)

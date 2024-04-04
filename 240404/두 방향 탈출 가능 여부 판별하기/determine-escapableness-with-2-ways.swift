@@ -25,8 +25,8 @@ func dfs(_ x: Int, _ y: Int) {
         if canMoveTo(nx, ny) {
             visited[nx][ny] = true
             dfs(nx, ny)
-            answer[ny][ny] = order
             order += 1
+            answer[ny][ny] = order
         }
     }
 

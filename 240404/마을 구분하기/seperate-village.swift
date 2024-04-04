@@ -11,10 +11,10 @@ var visited = Array(repeating: Array(repeating: false, count: n), count: n)
 var answer = [Int]()
 var count = 0
 
-@discardableResult
-func dfs(_ x: Int, _ y: Int) -> Int {
+func dfs(_ x: Int, _ y: Int) {
     let dx = [-1, 1, 0, 0]
     let dy = [0, 0, -1, 1]
+    map[x][y] = 0
     visited[x][y] = true
 
     for i in 0..<4 {
@@ -23,13 +23,11 @@ func dfs(_ x: Int, _ y: Int) -> Int {
 
         if canMove(nx, ny) {
             visited[nx][ny] = true
+            map[nx][ny] = 0
             count += 1
-            map[x][y] = 0
             dfs(nx, ny)
         }
     }
-
-    return count
 }
 
 func isInRange(_ x: Int, _ y: Int) -> Bool {
@@ -47,6 +45,7 @@ func canMove(_ x: Int, _ y: Int) -> Bool {
 for i in 0..<n {
     for j in 0..<n {
         if map[i][j] == 1 {
+            count = 1
             dfs(i,j)
             answer.append(count)
             count = 0
@@ -54,7 +53,6 @@ for i in 0..<n {
     }
 }
 
-answer = answer.filter { $0 != 0 }.map { $0 + 1 }
 answer.sort(by: <)
 
 print(answer.count)

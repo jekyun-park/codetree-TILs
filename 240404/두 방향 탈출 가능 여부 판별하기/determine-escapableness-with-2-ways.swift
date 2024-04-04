@@ -16,17 +16,15 @@ func dfs(_ x: Int, _ y: Int) {
     let dx = [1, 0]
     let dy = [0, 1]
 
-    visited[x][y] = true
-
     for i in 0...1 {
         let nx = x + dx[i]
         let ny = y + dy[i]
 
         if canMoveTo(nx, ny) {
             visited[nx][ny] = true
-            dfs(nx, ny)
             order += 1
             answer[ny][ny] = order
+            dfs(nx, ny)
         }
     }
 

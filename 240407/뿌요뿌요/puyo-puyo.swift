@@ -13,14 +13,12 @@ for _ in 0..<n {
 for i in 0..<n {
     for j in 0..<n {
         dfs(i,j)
-        if count >= 3 {
-            answers.append(count)
-        }
+        answers.append(count)
         count = 0
     }
 }
 
-print(answers.count, answers.max()!+1)
+print(answers.filter{ $0 >= 3 }.count, answers.max()!+1)
 
 func dfs(_ x: Int, _ y: Int) {
     let dx = [-1, 1, 0, 0]

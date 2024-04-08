@@ -27,7 +27,7 @@ var grid = [[Int]]()
 var starts = [(Int, Int)]()
 var queue = Queue<(Int, Int)>()
 var visited = Array(repeating: Array(repeating: false, count: n), count: n)
-var count = 1
+var count = 0
 var answer = 0
 
 for _ in 0..<n {

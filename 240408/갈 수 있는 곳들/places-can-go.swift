@@ -78,9 +78,9 @@ func isInRange(_ x: Int, _ y: Int) -> Bool {
 }
 
 for (x, y) in starts {
+    grid[x][y] == 0 ? (count = 1) : (count = 0)
     bfs(x, y)
     answer += count
-    count = 1
 }
 
 print(answer)

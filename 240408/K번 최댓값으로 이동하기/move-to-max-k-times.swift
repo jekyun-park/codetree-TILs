@@ -35,12 +35,22 @@ let rc = readLine()!.split(separator: " ").map { Int($0)! }
 let r = rc[0] - 1, c = rc[1] - 1
 var position = (r: r, c: c)
 var queue = Queue<(Int, Int)>()
-var maxValue = Int.min 
+var answer = [(Int, Int)]()
+var maxValue = 1 
 
 for _ in 0..<k {
     bfs(position.r, position.c)
+    if answer.isEmpty { break }
+    answer.sort {
+        if $0.0 == $1.0 {
+            return $0.1 < $1.1
+        }
+        return $0.0 < $1.0
+    }
+    position = (answer.first!.0, answer.first!.1)
     visited = Array(repeating: Array(repeating: false, count: n), count: n)
-    maxValue = Int.min
+    maxValue = 1
+    answer.removeAll()
 }
 
 print(position.r+1, position.c+1)
@@ -64,18 +74,10 @@ func bfs(_ x: Int, _ y: Int) {
 
             if canMoveTo(nx, ny, value) {
                 visited[nx][ny] = true
-                if grid[nx][ny] >= maxValue {
+                if grid[nx][ny] > maxValue {
                     maxValue = grid[nx][ny]
-                    if nx < position.r {
-                        position = (nx, ny)
-                    } else if nx == position.r {
-                        if ny < position.c {
-                            position = (nx, ny)
-                        }
-                    } else {
-                        position = (nx, ny)
-                    }
-                }       
+                    answer.append((nx, ny))
+                }
                 queue.enqueue((nx, ny))
             }
         }

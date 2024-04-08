@@ -27,7 +27,8 @@ var grid = [[Int]]()
 var starts = [(Int, Int)]()
 var queue = Queue<(Int, Int)>()
 var visited = Array(repeating: Array(repeating: false, count: n), count: n)
-var answer = 1
+var count = 1
+var answer = 0
 
 for _ in 0..<n {
     grid.append(readLine()!.split(separator: " ").map { Int($0)! })
@@ -57,7 +58,7 @@ func bfs(_ x: Int, _ y: Int) {
 
             if canMoveTo(nx, ny) {
                 visited[nx][ny] = true
-                answer += 1
+                count += 1
                 queue.enqueue((nx, ny))
             }
         }
@@ -78,6 +79,8 @@ func isInRange(_ x: Int, _ y: Int) -> Bool {
 
 for (x, y) in starts {
     bfs(x, y)
+    answer += count
+    count = 1
 }
 
 print(answer)

@@ -19,8 +19,11 @@ for row in grid {
             last = i
             count = 1
         }
+        if count >= m { 
+            answer += 1 
+            break
+        }
     }
-    if count >= m { answer += 1 }
 }
 
 for col in 0..<n {
@@ -33,8 +36,11 @@ for col in 0..<n {
             last = grid[i][col]
             count = 1
         }
+        if count >= m { 
+            answer += 1 
+            break
+        }
     }
-    if count >= m { answer += 1 }
 }
 
 print(answer)

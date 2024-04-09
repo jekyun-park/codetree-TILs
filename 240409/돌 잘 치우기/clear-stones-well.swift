@@ -17,7 +17,7 @@ for _ in 0..<n {
 
 for _ in 0..<k {
     let point = readLine()!.split(separator: " ").map { Int($0)! }
-    startPoints.append((point[0]-1 , point[1]-1))
+    startPoints.append((point[0] - 1 , point[1] - 1))
 }
 
 for i in 0..<n {
@@ -29,6 +29,7 @@ for i in 0..<n {
 }
 
 let cases = combination(stones, m)
+// print(stones)
 
 for points in cases {
     newGrid = grid
@@ -40,7 +41,7 @@ for points in cases {
         bfs(points.0, points.1)
         answer = max(answer, count)
         visited = Array(repeating: Array(repeating: false, count: n), count: n)
-        count = 0
+        count = 1
     }
     
 }

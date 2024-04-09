@@ -13,9 +13,7 @@ for row in grid {
     var last = 0
     var count = 1
     for i in row {
-        if last == 0 {
-            last = i
-        } else if last == i {
+        if last == i {
             count += 1 
         } else {
             last = i
@@ -29,9 +27,7 @@ for col in 0..<n {
     var last = 0
     var count = 1
     for i in 0..<n {
-        if last == 0 {
-            last = grid[i][col]
-        } else if last == grid[i][col] {
+        if last == grid[i][col] {
             count += 1 
         } else {
             last = grid[i][col]
@@ -40,6 +36,5 @@ for col in 0..<n {
     }
     if count >= m { answer += 1 }
 }
-
 
 print(answer)

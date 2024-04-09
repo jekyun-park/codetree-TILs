@@ -73,6 +73,7 @@ func bfs(_ x: Int, _ y: Int) {
 
     queue.enqueue((x, y))
     visited[x][y] = true
+    count += 1
 
     while !queue.isEmpty {
         guard let (x, y) = queue.dequeue() else { break }

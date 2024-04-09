@@ -36,13 +36,13 @@ for points in cases {
         newGrid[point.0][point.1] = 0
     }
     
+    count = 1
     for points in startPoints {
         bfs(points.0, points.1)
     }
 
     answer = max(answer, count)
     visited = Array(repeating: Array(repeating: false, count: n), count: n)
-    count = 1
 }
 
 print(answer)

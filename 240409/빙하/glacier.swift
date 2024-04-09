@@ -15,7 +15,7 @@ for _ in 0..<n {
 
 
 while true {
-    if grid.filter{ $0 == 1 }.count == 0 {
+    if grid.flatMap{ $0 }.filter{ $0 == 1 }.count == 0 {
         break
     }
     bfs(0, 0)

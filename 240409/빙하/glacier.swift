@@ -67,6 +67,7 @@ func canMove(_ y: Int, _ x: Int) -> Bool {
 }
 
 func bfs() {
+    visited = Array(repeating: Array(repeating: false, count: m), count: n)
     visited[0][0] = true
     queue.enqueue((0, 0))
 

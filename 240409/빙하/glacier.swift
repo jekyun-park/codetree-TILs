@@ -14,7 +14,10 @@ for _ in 0..<n {
 }
 
 
-while (grid.flatMap{ $0 }.reduce(0, +) != 0) {
+while true {
+    if grid.filter{ $0 == 1 }.count == 0 {
+        break
+    }
     bfs(0, 0)
     answer = meltGlacier(water)
     visited = Array(repeating: Array(repeating: false, count: m), count: n)

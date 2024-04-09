@@ -39,7 +39,7 @@ for points in cases {
     for points in startPoints {
         bfs(points.0, points.1)
     }
-    print(visitedPoints)
+
     answer = max(answer, visitedPoints.count)
     visited = Array(repeating: Array(repeating: false, count: n), count: n)
     visitedPoints.removeAll()

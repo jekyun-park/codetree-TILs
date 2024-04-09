@@ -7,7 +7,7 @@ var newGrid = [[Int]]()
 var startPoints = [(Int, Int)]()
 var stones = [(Int, Int)]()
 var answer = Int.min
-var count = 0
+var visitedPoints = Set<[Int]>()
 var visited = Array(repeating: Array(repeating: false, count: n), count: n)
 var queue = Queue<(x: Int, y: Int)>()
 
@@ -35,17 +35,17 @@ for points in cases {
     for point in points {
         newGrid[point.0][point.1] = 0
     }
-    
-    count = 0
+
     for points in startPoints {
         bfs(points.0, points.1)
     }
-
-    answer = max(answer, count)
+    print(visitedPoints)
+    answer = max(answer, visitedPoints.count)
     visited = Array(repeating: Array(repeating: false, count: n), count: n)
+    visitedPoints.removeAll()
 }
 
-print(answer+1)
+print(answer)
 
 
 func combination(_ array: [(Int, Int)], _ targetCount: Int) -> [[(Int, Int)]] {
@@ -73,6 +73,7 @@ func bfs(_ x: Int, _ y: Int) {
 
     queue.enqueue((x, y))
     visited[x][y] = true
+    visitedPoints.insert([x, y])
 
     while !queue.isEmpty {
         guard let (x, y) = queue.dequeue() else { break }
@@ -83,7 +84,7 @@ func bfs(_ x: Int, _ y: Int) {
 
             if canMove(nx, ny) {
                 visited[nx][ny] = true
-                count += 1
+                visitedPoints.insert([nx, ny])
                 queue.enqueue((nx, ny))
             }
         }

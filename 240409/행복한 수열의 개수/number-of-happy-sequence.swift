@@ -30,11 +30,11 @@ for col in 0..<n {
     var count = 1
     for i in 0..<n {
         if last == 0 {
-            last = grid[col][i]
-        } else if last == grid[col][i] {
+            last = grid[i][col]
+        } else if last == grid[i][col] {
             count += 1 
         } else {
-            last = grid[col][i]
+            last = grid[i][col]
             count = 1
         }
     }

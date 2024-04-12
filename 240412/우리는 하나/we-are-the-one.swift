@@ -29,7 +29,7 @@ let dx = [0, 0, -1, 1]
 var visited = Array(repeating: Array(repeating: false, count: n), count: n)
 var heights = [(Int, Int)]()
 var queue = Queue<(Int, Int)>()
-var answer = 0, count = 0
+var answer = Int.min, count = 0
 
 for i in 0..<n {
     for j in 0..<n {
@@ -44,11 +44,11 @@ for _ in 0..<n {
 }
 
 for points in coordinates {
+    count = 1
     for point in points {
         bfs(point.0, point.1)
     }
     answer = max(count, answer)
-    count = 0
     visited = Array(repeating: Array(repeating: false, count: n), count: n)
 }
 
@@ -56,7 +56,6 @@ print(answer)
 
 func bfs(_ x: Int, _ y: Int) {
     queue.enqueue((x, y))
-    count = 1
     visited[y][x] = true
 
     while !queue.isEmpty {

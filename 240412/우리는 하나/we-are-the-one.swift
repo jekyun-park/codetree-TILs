@@ -46,9 +46,10 @@ for _ in 0..<n {
 for points in coordinates {
     for point in points {
         bfs(point.0, point.1)
-        answer = max(count, answer)
-        count = 0
     }
+    answer = max(count, answer)
+    count = 0
+    visited = Array(repeating: Array(repeating: false, count: n), count: n)
 }
 
 print(answer)

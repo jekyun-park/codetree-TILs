@@ -29,11 +29,12 @@ let dx = [0, 0, -1, 1]
 var visited = Array(repeating: Array(repeating: false, count: n), count: n)
 var heights = [(Int, Int)]()
 var queue = Queue<(Int, Int)>()
-var answer = Int.min, count = 0
+var answer = Int.min
+var coordSet = Set<[Int]>()
 
 for i in 0..<n {
     for j in 0..<n {
-        heights.append((i, j))
+        heights.append((j, i))
     }
 }
 
@@ -44,22 +45,23 @@ for _ in 0..<n {
 }
 
 for points in coordinates {
-    count = 1
+    coordSet.removeAll()
     for point in points {
-        bfs(point.1, point.0)
+        bfs(point.0, point.1)
     }
-    answer = max(count, answer)
+    answer = max(coordSet.count, answer)
     visited = Array(repeating: Array(repeating: false, count: n), count: n)
 }
 
 print(answer)
 
-func bfs(_ x: Int, _ y: Int) {
-    queue.enqueue((x, y))
+func bfs(_ y: Int, _ x: Int) {
+    queue.enqueue((y, x))
     visited[y][x] = true
+    coordSet.insert([y, x])
 
     while !queue.isEmpty {
-        guard let (x, y) = queue.dequeue() else { return }
+        guard let (y, x) = queue.dequeue() else { return }
         
         for i in 0..<4 {
             let ny = y + dy[i]
@@ -67,8 +69,8 @@ func bfs(_ x: Int, _ y: Int) {
 
             if canMoveTo(nx, ny, grid[y][x]) {
                 visited[ny][nx] = true
-                count += 1
-                queue.enqueue((nx, ny))
+                coordSet.insert([ny, nx])
+                queue.enqueue((ny, nx))
             }
         }
 
@@ -81,7 +83,7 @@ func isInRange(_ x: Int, _ y: Int) -> Bool {
 
 func canMoveTo(_ x: Int, _ y: Int, _ height: Int) -> Bool {
     if !isInRange(x, y) { return false }
-    if visited[y][x] || !(u...d ~= abs(grid[y][x]-height)) { return false }
+    if visited[y][x] || !(u...d ~= abs(grid[y][x] - height)) { return false }
     return true
 }
 

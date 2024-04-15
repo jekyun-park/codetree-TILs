@@ -66,4 +66,4 @@ queue.enqueue((0, 0))
 visited[0][0] = true
 bfs()
 
-print(distance[n-1][m-1])
+print(distance[n-1][m-1] != 0 ? distance[n-1][m-1] : -1)

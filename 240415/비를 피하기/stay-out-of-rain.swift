@@ -37,6 +37,8 @@ func canMove(_ x: Int, _ y: Int) -> Bool {
 }
 
 func bfs(_ x: Int, _ y: Int) {
+    var findShelter = false
+
     queue.enqueue((x, y))
     visited[y][x] = true
 
@@ -54,24 +56,14 @@ func bfs(_ x: Int, _ y: Int) {
                 visited[ny][nx] = true
                 distances[ny][nx] = distances[y][x] + 1
                 queue.enqueue((nx, ny))
+                if grid[ny][nx] == 3 {
+                    currentMinimum = min(currentMinimum, distances[y][x] + 1)
+                    findShelter = true
+                    break
+                }
             }
         }
-    }
-}
-
-func findMinimumShelterDistance(_ x: Int, _ y: Int) {
-    var values = [Int]()
-    
-    for shelter in shelters {
-        values.append(distances[shelter.0][shelter.1])
-    }
-
-    let filtered = values.filter { $0 != 0 }
-
-    if filtered.count == 0 {
-        answer[y][x] = -1
-    } else {
-        answer[y][x] = filtered.min()!
+        if findShelter { break }
     }
 }
 
@@ -82,8 +74,7 @@ var visited = Array(repeating: Array(repeating: false, count: n), count: n)
 var distances = Array(repeating: Array(repeating: 0, count: n), count: n)
 var answer = Array(repeating: Array(repeating: 0, count: n), count: n)
 var queue = Queue<(Int, Int)>()
-var positions = [(Int, Int)]()
-var shelters = [(Int, Int)]()
+var currentMinimum = Int.max
 
 for _ in 0..<n {
     grid.append(readLine()!.split(separator: " ").map { Int($0)! })
@@ -91,18 +82,20 @@ for _ in 0..<n {
 
 for i in 0..<n {
     for j in 0..<n {
-        if grid[i][j] == 2 { positions.append((i, j)) }
-        if grid[i][j] == 3 { shelters.append((i, j)) }
+        if grid[i][j] == 2 { 
+            currentMinimum = Int.max
+            distances = Array(repeating: Array(repeating: 0, count: n), count: n)
+            visited = Array(repeating: Array(repeating: false, count: n), count: n)
+            queue.removeAll()
+            bfs(j, i) 
+            
+            if currentMinimum != Int.max {
+                answer[i][j] = currentMinimum
+            } else {
+                answer[i][j] = -1
+            }
+        }
     }
-}
-
-for position in positions {
-    bfs(position.1, position.0)
-    findMinimumShelterDistance(position.1, position.0)
-
-    visited = Array(repeating: Array(repeating: false, count: n), count: n)
-    distances = Array(repeating: Array(repeating: 0, count: n), count: n)
-    queue.removeAll()
 }
 
 for i in 0..<n {

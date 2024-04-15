@@ -59,7 +59,7 @@ var distance = Array(repeating: Array(repeating: 0, count: n), count: n)
 var queue = Queue<(Int, Int)>()
 
 if (r1 == r2) && (c1 == c2) {
-    print(1)
+    print(0)
 } else {
     queue.enqueue((r1, c1))
     visited[r1][c1] = true

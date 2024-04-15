@@ -66,10 +66,12 @@ func findMinimumShelterDistance(_ x: Int, _ y: Int) {
         values.append(distances[shelter.0][shelter.1])
     }
 
-    if values.filter { $0 != 0 }.count == 0 {
+    let filtered = values.filter { $0 != 0 }
+
+    if filtered.count == 0 {
         answer[y][x] = -1
     } else {
-        answer[y][x] = values.filter { $0 != 0 }.min()!
+        answer[y][x] = filtered.min()!
     }
 }
 

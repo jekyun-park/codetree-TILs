@@ -54,7 +54,10 @@ func bfs() {
 let n = Int(readLine()!)!
 let points = readLine()!.split(separator: " ").map { Int($0)! }
 let r1 = points[0]-1, c1 = points[1]-1, r2 = points[2]-1, c2 = points[3]-1
-
+if (r1 == r2) && (c1 == c2) {
+    print(1)
+    exit()
+}
 var visited = Array(repeating: Array(repeating: false, count: n), count: n)
 var distance = Array(repeating: Array(repeating: 0, count: n), count: n)
 var queue = Queue<(Int, Int)>()

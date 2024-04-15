@@ -60,18 +60,16 @@ func bfs(_ x: Int, _ y: Int) {
 }
 
 func findMinimumShelterDistance(_ x: Int, _ y: Int) {
-    var minDistance = (y: 0, x: 0, distance: Int.max)
+    var values = [Int]()
     
     for shelter in shelters {
-        if minDistance.distance >= distances[shelter.0][shelter.1] {
-            minDistance = (shelter.0, shelter.1, distances[shelter.0][shelter.1])
-        }
+        values.append(distances[shelter.0][shelter.1])
     }
-    
-    if minDistance.distance == 0 {
+
+    if values.filter { $0 != 0 }.count == 0 {
         answer[y][x] = -1
     } else {
-        answer[y][x] = minDistance.distance
+        answer[y][x] = values.filter { $0 != 0 }.min()!
     }
 }
 
@@ -99,6 +97,7 @@ for i in 0..<n {
 for position in positions {
     bfs(position.1, position.0)
     findMinimumShelterDistance(position.1, position.0)
+
     visited = Array(repeating: Array(repeating: false, count: n), count: n)
     distances = Array(repeating: Array(repeating: 0, count: n), count: n)
     queue.removeAll()

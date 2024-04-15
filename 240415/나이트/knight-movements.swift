@@ -62,7 +62,7 @@ if (r1 == r2) && (c1 == c2) {
     print(0)
 } else {
     queue.enqueue((r1, c1))
-    visited[r1][c1] = true
+    visited[c1][r1] = true
     bfs()
-    print(distance[r2][c2] == 0 ? -1 : distance[r2][c2])
+    print(distance[c2][r2] == 0 ? -1 : distance[c2][r2])
 }

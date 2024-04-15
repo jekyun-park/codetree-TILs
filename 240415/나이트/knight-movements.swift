@@ -54,16 +54,15 @@ func bfs() {
 let n = Int(readLine()!)!
 let points = readLine()!.split(separator: " ").map { Int($0)! - 1 }
 let r1 = points[0], c1 = points[1], r2 = points[2], c2 = points[3]
+var visited = Array(repeating: Array(repeating: false, count: n), count: n)
+var distance = Array(repeating: Array(repeating: 0, count: n), count: n)
+var queue = Queue<(Int, Int)>()
 
 if (r1 == r2) && (c1 == c2) {
     print(1)
 } else {
-    var visited = Array(repeating: Array(repeating: false, count: n), count: n)
-    var distance = Array(repeating: Array(repeating: 0, count: n), count: n)
-    var queue = Queue<(Int, Int)>()
     queue.enqueue((r1, c1))
     visited[r1][c1] = true
-
     bfs()
     print(distance[r2][c2] == 0 ? -1 : distance[r2][c2])
 }

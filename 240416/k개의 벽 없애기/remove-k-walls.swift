@@ -118,4 +118,4 @@ for walls in chosen {
     }
 }
 
-print(answer == 0 ? -1 : answer)
+print((answer == 0 || answer == Int.max) ? -1 : answer)

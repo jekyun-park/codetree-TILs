@@ -29,16 +29,16 @@ while N != 1 {
         N /= 3
     } else if N % 2 == 0 {
         N /= 2
-    } else if (N+1) % 3 == 0 {
-        N += 1
     } else if (N-1) % 3 == 0 {
         N -= 1
-    } else if (N+1) % 2 == 0 {
+    } else if (N+1) % 3 == 0 {
         N += 1
     } else if (N-1) % 2 == 0 {
         N -= 1
+    } else if (N+1) % 2 == 0 {
+        N += 1
     }
-    
+
     answer += 1
 }
 

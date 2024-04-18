@@ -24,59 +24,32 @@ struct Queue<T> {
 let N = Int(readLine()!)!
 var queue = Queue<(count: Int, number: Int)>()
 var answer = 0
-var visited = Array(repeating: false, count:1_000_001)
-visited[N] = true
+var visited = Set<Int>()
+visited.insert(N)
 queue.enqueue((0, N))
 
 while !queue.isEmpty {
     
     guard let (count, number) = queue.dequeue() else { break }
-
-    for i in 0..<4 {
-        var newNumber = number
-
-        switch i {
-        case 0:
-            newNumber -= 1
-        case 1:
-            newNumber += 1
-        case 2:
-            if newNumber % 3 == 0 {
-                newNumber /= 3
-            } else {
-                continue
-            }
-        case 3:
-            if newNumber % 2 == 0 {
-                newNumber /= 2
-            } else {
-                continue
-            }
-        default:
-            break
-        }
-
-        if check(newNumber) {
-            if newNumber == 1 { 
-                answer = count + 1
-                break
-            } else {
-                visited[newNumber] = true
-                queue.enqueue((count + 1, newNumber))
-            }
-        }
+    
+    if number == 1 {
+        answer = count
+        break
+    } 
+    
+    if (number % 3 == 0) && !visited.contains(number/3) {
+        visited.insert(number/3)
+        queue.enqueue((count+1, number/3))
+    } else if (number % 2 == 0) && !visited.contains(number/2){
+        visited.insert(number/2)
+        queue.enqueue((count+1, number/2))
+    } else if !visited.contains(number+1) {
+        visited.insert(number+1)
+        queue.enqueue((count+1, number+1))
+    } else if !visited.contains(number-1) {
+        visited.insert(number-1)
+        queue.enqueue((count+1, number-1))
     }
-
-}
-
-func check(_ n: Int) -> Bool {
-    if !isInRange(n) { return false }
-    if visited[n] { return false }
-    return true
-}
-
-func isInRange(_ n: Int) -> Bool {
-    return (1...1_000_000) ~= n
 }
 
 print(answer)

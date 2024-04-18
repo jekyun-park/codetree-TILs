@@ -31,11 +31,6 @@ queue.enqueue((0, N))
 while !queue.isEmpty {
     
     guard let (count, number) = queue.dequeue() else { break }
-    
-    if number == 1 {
-        answer = count
-        break
-    }
 
     for i in 0..<4 {
         var newNumber = number

@@ -30,7 +30,7 @@ while N != 1 {
     } else if N % 2 == 0 {
         N /= 2
     } else {
-        N += 1
+        N -= 1
     }
     answer += 1
 }
